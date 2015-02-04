@@ -13,7 +13,7 @@ class Node(object):
 
 
 
-class linked_list(object):
+class Linked_list(object):
     """" """
 
     def __init__(self):
@@ -29,4 +29,13 @@ class linked_list(object):
 
         print self.head
 
+    def __str__(self):
+        output = ""
+        currentposition = self.head
+        while(currentposition):
+            # ', '.join((output, str(currentposition.value)))
+            output+= str(currentposition.value)
+            currentposition = currentposition.pointer
+        output = "({})".format(output)
+        return output
 
