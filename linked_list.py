@@ -35,8 +35,14 @@ class Linked_list(object):
         currentposition = self.head
         while currentposition:
             # ', '.join((output, str(currentposition.value)))
-            output+= str(currentposition.value)
+            if isinstance(currentposition.value, str):
+                output += "'{}'".format(currentposition.value)
+            else:
+                output += str(currentposition.value)
             currentposition = currentposition.pointer
+            if currentposition:
+                output += str(", ")
+
         output = "({})".format(output)
         return output
 
@@ -77,26 +83,6 @@ class Linked_list(object):
                 previousposition.pointer = currentposition.pointer
             previousposition = currentposition
             currentposition = currentposition.pointer
-
-if __name__ == "__main__":
-    a = Linked_list()
-    a.insert("tree")
-    a.insert("bee")
-    a.insert(34)
-    # print a.size()
-    # print str(a)
-    # print a.pop()
-    # print str(a)
-    # print a.size()
-    # print a.search("tree")
-    # print a.search(34)
-    print str(a)
-    a.remove(a.search("bee"))
-    print str(a)
-    a.remove(a.search(34))
-    print str(a)
-    a.remove(a.search("tree"))
-    print str(a)
 
 
 
