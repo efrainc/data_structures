@@ -78,6 +78,9 @@ def test_str():
     a.insert("Last")
     a.insert(4545)
     assert str(a) == "(4545, 'Last', 'Efrain', 1232, 'Henry', 'Mark')"
+    # Test string evaluates to a tuple literal
+    assert eval(str(a)) == (4545, 'Last', 'Efrain', 1232, 'Henry', 'Mark')
+
 
 
 def test_size():
