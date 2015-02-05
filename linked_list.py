@@ -4,19 +4,16 @@
 
 class Node(object):
     """Class identifying Node in linked list
-
     with a pointer to the next node and a value
     """
 
     def __init__(self, value, pointer=None):
         """Constructor for node
-
         which requires a value, and an optional pointer
         If no pointer is specified, it's set to None
         """
         self.pointer = pointer
         self.value = value
-        return None
 
 
 class Linked_list(object):
@@ -24,7 +21,6 @@ class Linked_list(object):
 
     def __init__(self):
         """Constructor for linked list
-
         Initializing a pointer to a head of an empty linked list.
         """
         self.head = None
@@ -32,13 +28,7 @@ class Linked_list(object):
     def insert(self, value):
         """Insert new node with value at the head of the list.
         """
-        if not self.head:
-            self.head = Node(value)
-        else:
-            new_node = Node(value, self.head)
-            self.head = new_node
-
-        print self.head
+        self.head = Node(value, self.head)
 
     def __str__(self):
         """Returns list as a Python tuple literal.
@@ -47,14 +37,14 @@ class Linked_list(object):
         currentposition = self.head
         while currentposition:
             if isinstance(currentposition.value, str):
-                value = "'{}'".format(currentposition.value)
+                value = "'{}'".format(currentposition.value.encode('utf-8'))
                 output = "{}{}".format(output, value)
             else:
-                output = "{}{}".format(output, str(currentposition.value))
+                output = "{}{}".format(output, currentposition.value)
             currentposition = currentposition.pointer
             if currentposition:
-                output += str(", ")
-
+                comma = ", "
+                output = "{}{}".format(output, comma)
         output = "({})".format(output)
         return output
 
@@ -65,6 +55,7 @@ class Linked_list(object):
 
     def pop(self):
         """Pop the first value off the head of the list and return value.
+        Raises attribute error if called on an empty linked list.
         """
         old_head_value = self.head.value
         self.head = self.head.pointer
@@ -104,5 +95,13 @@ class Linked_list(object):
         while currentposition:
             if currentposition == node:
                 previousposition.pointer = currentposition.pointer
+                return None
             previousposition = currentposition
             currentposition = currentposition.pointer
+
+    # def __iter__(self):
+    #     current = self.head
+    #     while current:
+    #         yield current
+    #         current = current.pointer
+        # for node in self
