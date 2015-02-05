@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-# Linked List Python file for Efrain , Mark and Henry
+# Linked List Python file for Efrain, Mark and Henry
 
 
 class Node(object):
@@ -20,7 +20,7 @@ class Node(object):
 
 
 class Linked_list(object):
-    """Class defining a linked list data structure"""
+    """Class defining a linked list data structure."""
 
     def __init__(self):
         """Constructor for linked list
@@ -30,7 +30,7 @@ class Linked_list(object):
         self.head = None
 
     def insert(self, value):
-        """insert new node with value at the head of the list.
+        """Insert new node with value at the head of the list.
         """
         if not self.head:
             self.head = Node(value)
@@ -81,7 +81,7 @@ class Linked_list(object):
         return count
 
     def search(self, value):
-        """Return the node containing value in the list, if present, else None
+        """Return the node containing value in the list, if present, else None.
         """
         currentposition = self.head
         while currentposition:
@@ -91,9 +91,7 @@ class Linked_list(object):
         return None
 
     def remove(self, node):
-        """Remove the given node from the list, assuming
-
-        node is in list
+        """Remove the given node from the list, assuming node is in list.
         """
         currentposition = self.head
         previousposition = None
