@@ -10,6 +10,11 @@ Linked_list
     is returned. If there are multiple nodes with the query value, only
     the first instance is found.
 
+Stack
+    A stack is a sequence of nodes that has a top. You can put new nodes
+    on top by pushing a value to it and you can remove a node from the
+    top by popping which also returns the node. 
+
 Resources:
     None
 
