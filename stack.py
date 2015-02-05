@@ -40,4 +40,22 @@ class Stack(object):
         except AttributeError:
             raise AttributeError(u'Tried to pop an empty list')
         
+    def __str__(self):
+       """Returns stack as a Python tuple literal.
+       List items from top to bottom.
+       """
+       output = ""
+       currentposition = self.top
+       while currentposition:
+           if isinstance(currentposition.value, str):
+               value = "'{}'".format(currentposition.value.encode('utf-8'))
+               output = "{}{}".format(output, value)
+           else:
+               output = "{}{}".format(output, currentposition.value)
+           currentposition = currentposition.pointer
+           if currentposition:
+               comma = ", "
+               output = "{}{}".format(output, comma)
+       output = "({})".format(output)
+       return output
 

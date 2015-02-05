@@ -21,6 +21,8 @@ def test_push(empty_stack, populated_stack):
 
 def test_pop(populated_stack):
     """Test pop function, with empty and populated stacks."""
+    assert 6 == populated_stack.pop()
+    assert 5 == populated_stack.pop()
     assert 'fourth' == populated_stack.pop()
     assert 'third' == populated_stack.pop()
     assert 'second' == populated_stack.pop()
@@ -28,13 +30,18 @@ def test_pop(populated_stack):
     with pytest.raises(AttributeError):
         assert populated_stack.pop()
 
+def test_str(populated_stack):
+    """Test str to return a string version of a literal tuple"""
+    assert str(populated_stack) == "(6, 5, 'fourth', 'third', 'second', 'first')"
+    # Test string evaluates to a tuple literal
+    assert eval(str(populated_stack)) == (6, 5, 'fourth', 'third', 'second', 'first')
+
 
 @pytest.fixture(scope='function')
 def empty_stack(request):
     """Fixture generates empty stack for testing."""
-    empty = st.Stack()
-    return empty
-
+    return st.Stack()
+    
 
 @pytest.fixture(scope='function')
 def populated_stack(request):
@@ -44,4 +51,6 @@ def populated_stack(request):
     populated.push('second')
     populated.push('third')
     populated.push('fourth')
+    populated.push(5)
+    populated.push(6)
     return populated
