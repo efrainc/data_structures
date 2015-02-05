@@ -1,5 +1,5 @@
 # data_structures
-Working Database for Efrain, Mark, Henry - Python Data Structures
+Working directory for Efrain, Mark, Henry - Python Data Structures
 
 Linked_list
     A linked list is defined by sequence of nodes.
