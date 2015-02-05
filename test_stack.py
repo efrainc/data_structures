@@ -31,12 +31,14 @@ def test_pop(populated_stack):
 
 @pytest.fixture(scope='function')
 def empty_stack(request):
+    """Fixture generates empty stack for testing."""
     empty = st.Stack()
     return empty
 
 
 @pytest.fixture(scope='function')
 def populated_stack(request):
+    """Fixture generates a populated stack."""
     populated = st.Stack()
     populated.push('first')
     populated.push('second')
