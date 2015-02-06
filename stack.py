@@ -30,30 +30,28 @@ class Stack(object):
     def pop(self):
         """Unbinds top node of stack and returns its value.
         If pop() on an empty stack raises AttributeError."""
-        
         try:
             old_top = self.top.value
             self.top = self.top.pointer
             return old_top
         except AttributeError:
             raise AttributeError(u'Cannot pop from an empty list')
-        
-    def __str__(self):
-       """Returns the stack as a string representation of a Python tuple literal.
-       Lists items from top to bottom.
-       """
-       output = ""
-       currentposition = self.top
-       while currentposition:
-           if isinstance(currentposition.value, str):
-               value = "'{}'".format(currentposition.value.encode('utf-8'))
-               output = "{}{}".format(output, value)
-           else:
-               output = "{}{}".format(output, currentposition.value)
-           currentposition = currentposition.pointer
-           if currentposition:
-               comma = ", "
-               output = "{}{}".format(output, comma)
-       output = "({})".format(output)
-       return output
 
+    def __str__(self):
+        """Returns the stack as a string representation of a Python tuple literal.
+        Lists items from top to bottom.
+        """
+        output = ""
+        currentposition = self.top
+        while currentposition:
+            if isinstance(currentposition.value, (str, unicode)):
+                value = "'{}'".format(currentposition.value.encode('utf-8'))
+                output = "{}{}".format(output, value)
+            else:
+                output = "{}{}".format(output, currentposition.value)
+            currentposition = currentposition.pointer
+            if currentposition:
+                comma = ", "
+                output = "{}{}".format(output, comma)
+        output = "({})".format(output)
+        return output
