@@ -13,7 +13,7 @@ Linked_list
 Stack
     A stack is a sequence of nodes that has a top. You can put new nodes
     on top by pushing a value to it and you can remove a node from the
-    top by popping which also returns the node.
+    top by popping which also returns the node. 
 
 MS_parenthetics
     Given a string, method will determine if parenthese are balanced. Uses a
