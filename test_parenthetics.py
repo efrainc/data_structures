@@ -25,6 +25,7 @@ def test_return_zero():
     assert pa.parenthetics(test_str2) == 0
     # test with multiple parentheses
     test_str3 = u'aaaaa(bbbb((bbbbb)bbbb)())()'
+    assert pa.parenthetics(test_str3) == 0
     # test with multiple parentheses at start
     test_str4 = u'()()(aaaaa(bbbb((bbbbb)bbbb)())())'
     assert pa.parenthetics(test_str4) == 0
