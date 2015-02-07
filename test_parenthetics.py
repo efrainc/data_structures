@@ -11,6 +11,9 @@ def test_return_one():
     # test with multiple open parentheses
     test_str3 = u'aaaaa(bbbb((bbbbb)bbbb()('
     assert pa.parenthetics(test_str3) == 1
+    # test for simplest string
+    test_str4 = u'('
+    assert pa.parenthetics(test_str4) == 1
 
 
 def test_return_zero():
@@ -22,7 +25,12 @@ def test_return_zero():
     assert pa.parenthetics(test_str2) == 0
     # test with multiple parentheses
     test_str3 = u'aaaaa(bbbb((bbbbb)bbbb)())()'
-    assert pa.parenthetics(test_str3) == 0
+    # test with multiple parentheses at start
+    test_str4 = u'()()(aaaaa(bbbb((bbbbb)bbbb)())())'
+    assert pa.parenthetics(test_str4) == 0
+    # test empty string
+    test_str5 = u''
+    assert pa.parenthetics(test_str5) == 0
 
 
 def test_return_neg_one():
@@ -41,3 +49,5 @@ def test_return_neg_one():
     # test with multiple and unmatched parentheses
     test_str5 = u'aaaaa(bbbb))((bbbbb)bbbb)())()'
     assert pa.parenthetics(test_str5) == -1
+    # test with multiple and unparentheses at start
+    test_str4 = u'())aaaaa(bbbb))((bbbbb)bbbb)())()'
