@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 
 import stack
 
+
 def parenthetics(text):
     """Determines if a string is "open", "balanced", or "broken" given a string.
 
@@ -20,16 +21,17 @@ def parenthetics(text):
     (a closing parens has not been proceeded by one that opens)
     """
 
+    # number of open parens
     parens = stack.Stack()
 
     while text:
         if text[0] == ')':
-            if not parens.top:
+            if not parens.top:  # case of ), but no ( on stack
                 return -1
-            parens.pop()
+            parens.pop()  # if ( on stack, pop one off
         elif text[0] == '(':
-            parens.push('(')
-        text = text[1:]        
+            parens.push('(')  # doesn't matter what value is
+        text = text[1:]
     if not parens.top:
         return 0
     else:
