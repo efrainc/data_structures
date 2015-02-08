@@ -4,33 +4,17 @@ import pytest  # used for exception testing
 import parenthetics as p
 
 
-@pytest.fixture(scope='function')
-def open_text():
-    """Fixture generates a string with:
-    an open paren that is not closed.
-    """
-    return "("
-
-
-@pytest.fixture(scope='function')
-def open_text():
-    """Fixture generates a string with:
-    an open paren that is not closed.
-    """
-    return "("
-
-
 def test_parenthetics_open():
     """Tests a string with:
     an open paren that is not closed.
     """
     single = "("
-    nested_single = "((((())))"
-    double = "(("
-    extra_beginning = "(()"
-    extra_end = "()("
-    extra_middle = "()(()"
-    nested_extra_middle = "(()(())"
+    nested_single = "(((((a))))"
+    double = "((a"
+    extra_beginning = "(a(a)"
+    extra_end = "(a)b(bb"
+    extra_middle = "(b)(b(b)"
+    nested_extra_middle = "((bbb)cc((bbb))"
     assert p.parenthetics(single) == 1
     assert p.parenthetics(nested_single) == 1
     assert p.parenthetics(double) == 1
@@ -45,11 +29,11 @@ def test_parenthetics_balanced():
     an equal number of open and closed parentheses.
     """
     no_parens = ""
-    single = "()"
-    double = "()()"
-    triple = "()()()"
-    nested = "(())"
-    double_nested = "((()))"
+    single = "(a)a"
+    double = "()a()a"
+    triple = "(a)(b)(c)"
+    nested = "((abc))"
+    double_nested = "(((acd))d)"
     double_inside_nested = "(()())"
     nested_inside_nested = "((())())"
     assert p.parenthetics(no_parens) == 0
@@ -67,12 +51,12 @@ def test_parenthetics_broken():
     a closing parens that has not been proceeded by one that opens.
     """
     single = ")"
-    nested_single = "(((()))))"
-    double = "))"
-    extra_beginning = ")()"
-    extra_end = "())"
-    extra_middle = "())()"
-    nested_extra_middle = "(())())"
+    nested_single = "a(a(((a)))))a"
+    double = ")c)c"
+    extra_beginning = ")d(d)"
+    extra_end = "(d)d)"
+    extra_middle = "())aaaaaaa()"
+    nested_extra_middle = "(())abc())"
     assert p.parenthetics(single) == -1
     assert p.parenthetics(nested_single) == -1
     assert p.parenthetics(double) == -1

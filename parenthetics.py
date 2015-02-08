@@ -31,5 +31,7 @@ def parenthetics(text, open_parens=0):
         if open_parens < 0:
             return -1
         return parenthetics(text[1:], open_parens)
-    if text[0] == '(':
+    elif text[0] == '(':
         return parenthetics(text[1:], open_parens+1)
+    else:
+        return parenthetics(text[1:], open_parens)
