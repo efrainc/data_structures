@@ -1,13 +1,12 @@
 #! /usr/bin/env python
-# parenthetics - version using stack
+# parenthetics - recursive version
 #
 # by Henry Grantham
 
 from __future__ import unicode_literals
 
-import stack
 
-def parenthetics(text):
+def parenthetics(text, open_parens=0):
     """Determines if a string is "open", "balanced", or "broken" given a string.
 
     Takes a unicode string (text) as input and returns one of
@@ -20,17 +19,19 @@ def parenthetics(text):
     (a closing parens has not been proceeded by one that opens)
     """
 
-    parens = stack.Stack()
-
-    while text:
-        if text[0] == ')':
-            if not parens.top:
-                return -1
-            parens.pop()
-        elif text[0] == '(':
-            parens.push('(')
-        text = text[1:]        
-    if not parens.top:
+    # reached end of text block:
+    if not text and open_parens == 0:
         return 0
-    else:
+    elif not text and open_parens > 0:
         return 1
+
+    if text[0] == ')':
+        open_parens -= 1
+        # if there are more closed parens than open, return -1
+        if open_parens < 0:
+            return -1
+        return parenthetics(text[1:], open_parens)
+    elif text[0] == '(':
+        return parenthetics(text[1:], open_parens+1)
+    else:
+        return parenthetics(text[1:], open_parens)
