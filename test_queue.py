@@ -33,12 +33,30 @@ def test_dequeue(populated_queue):
     with pytest.raises(AttributeError):
         assert populated_queue.dequeue()
 
+def test_enqueue_and_dequeue(empty_queue, populated_queue):
+    """Test enqueues mixed with dequeues."""
+    empty_queue.enqueue('first')
+    empty_queue.enqueue('second')
+    assert 'first' == empty_queue.front.value
+    assert 'second' == empty_queue.back.value  
+    assert 'first' == empty_queue.dequeue()
+    assert 'second' == empty_queue.front.value
+    assert 'second' == empty_queue.back.value
+    empty_queue.enqueue('third')
+    empty_queue.enqueue('fourth')
+    assert 'second' == empty_queue.dequeue()
+    assert 'third' == empty_queue.front.value
+    assert 'fourth' == empty_queue.back.value
+
+
 def test_size(empty_queue, populated_queue):
     """Test the size of queue. Unpopulated will return 0.
     populated will return number of entries."""
     assert 0 == empty_queue.size()
     assert 6 == populated_queue.size()
-
+    populated_queue.dequeue()
+    populated_queue.dequeue()
+    assert 4 == populated_queue.size()
 
 @pytest.fixture(scope='function')
 def empty_queue():
