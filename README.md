@@ -15,6 +15,16 @@ Stack
     on top by pushing a value to it and you can remove a node from the
     top by popping which also returns the node. 
 
+
+Hg_parenthetics
+    paranthetics is a function that accepts a unicode string (text) as
+    input and returns one of these three possible values:
+
+    Return 1 if the string is "open" (there are open parens that are not closed)
+    Return 0 if the string is "balanced" (there are an equal number of open and closed parentheses in the string)
+    Return -1 if the string is "broken" (a closing parens has not been proceeded by one that opens) 
+    Open and closed parens must match, so "))((" would be considered "broken" 
+
 Resources:
     None
 
