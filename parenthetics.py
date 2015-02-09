@@ -21,20 +21,19 @@ def parenthetics(text):
     (a closing parens has not been proceeded by one that opens)
     """
 
-    #number of open parens
+    # number of open parens
     parens = stack.Stack()
 
     text_list = list(text)
 
     while text_list:
         element = text_list.pop(0)
-        if element == ')':
-            if not parens.top:  # case of ), but no ( on stack
-                return -1
-            parens.pop()  # if ( on stack, pop one off
-        elif element == '(':
+        if element == ')' and parens.top:  # case ) and ( on stack, pop one off
+            parens.pop()
+        elif element == ')':  # case of ), but no ( on stack then "broken"
+            return -1
+        elif element == '(':  # case of (, push a ( onto stack
             parens.push('(')  # doesn't matter what value is
-    if not parens.top:
-        return 0
-    else:
+    if parens.top:
         return 1
+    return 0
