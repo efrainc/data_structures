@@ -7,17 +7,19 @@ import queue as que
 def test_init():
     """Test queue constructor."""
     a = que.Queue()
-    assert a.top is None
+    assert a.front is None
+    assert a.back is None
 
 def test_enqueue(empty_queue, populated_queue):
     """Test enqueue with empty and populated queue."""
     empty_queue.enqueue('first')
-    assert isinstance(empty_queue.top, que.Node)
-    assert empty_queue.top.pointer is None
-    assert 'first' == empty_queue.top.value
-    populated_queue.enqueue('seven')
-    assert 'seven' == populated_queue.top.value
-    populated_queue.enqueue(8)
+    assert isinstance(empty_queue.front, que.Node)
+    assert isinstance(empty_queue.back, que.Node)
+    # assert empty_queue.front.pointer is None
+    # assert empty_queue.back.pointer is None
+    assert 'first' == empty_queue.back.value
+    populated_queue.enqueue(7)
+    assert 'first' == populated_queue.front.value
 
 def test_dequeue(populated_queue):
     """Test dequeue with populated and empty queus."""
@@ -29,7 +31,7 @@ def test_dequeue(populated_queue):
     assert 6 == populated_queue.dequeue()
     # Test popping from an empty queue to raise an AttrubuteError;
     with pytest.raises(AttributeError):
-        assert populated_queue.pop()
+        assert populated_queue.dequeue()
 
 def test_size(empty_queue, populated_queue):
     """Test the size of queue. Unpopulated will return 0.
