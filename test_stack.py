@@ -2,12 +2,12 @@
 # Authors Mark, Efrain, Henry
 
 import pytest
-from stack import stack as st
+import stack as st
 
 
 def test_init():
     """Test stack constructor."""
-    a = Stack()
+    a = st.Stack()
     assert a.top is None
 
 
