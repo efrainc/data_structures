@@ -26,6 +26,20 @@ ec_parenthetics
     Funtion takes a user submitted text. Encodes it in utf-8 and evaluates
     the text for proper parentheical assignment.
 
+Doubly-Linked-List(dll)
+    A dll is a defined by a sequence of nodes each with a value and two
+    pointers pointing to the next and previous nodes. It has a head and tail
+    which point to the first and last nodes. Values can be added and removed
+    from either the head or tail. The remove method removes the first instance
+    of the value starting at the head.
+
+    Application:
+    Use a DLL if removing or adding from front and back. A DLL uses more
+    memory than LL, but will be faster to remove items from end of list.
+    A DLL has the functionality of a queue and a stack.
+    Ex: If there is a line at the DMV, it'd better to use a DLL, because
+    it is faster to remove an item from the line. This is also the case
+    for a print queue, where'd we want to remove a job from the queue.
 
 
 Resources:
