@@ -28,7 +28,7 @@ class Queue(object):
     def enqueue(self, value):
         """Adds a node with the value to the back of the queue"""
         old_back = self.back
-        self.back = Node(value)  # set  Nodes next to the old back
+        self.back = Node(value)
         if self.size() > 0:  # if any Nodes: set back previous to current Node
             old_back.point_previous = self.back
         else:  # adding to an empty, than define front
