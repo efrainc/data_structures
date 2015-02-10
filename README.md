@@ -15,6 +15,11 @@ Stack
     on top by pushing a value to it and you can remove a node from the
     top by popping which also returns the node.
 
+Queue
+    A queue is a sequence of nodes that has a front and back. It follows
+    the principle of FIFO, first in, first out. You can add new nodes to
+    the end and dequeue values from the front which also removes that node.
+
 ec_parenthetics
     Corresponding to work submitted and owned by Efrain Camacho on the
     parenthetics assignment. Captured in git hub branch ec_parenthetics.
