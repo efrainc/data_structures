@@ -93,22 +93,25 @@ def test_append(empty_dll, populated_dll):
     assert populated_dll.head.next is None
     assert populated_dll.tail.previous is None
 
-def test_pop():
-    """Test pop method with a populated and empty list.
-
-    Validate pop output and removal"""
-
-    a = dll.Dll()
-    a.insert("Mark")
-    a.insert("Henry")
-    assert a.pop() == "Henry"
-    # Confirming that Mark is the new Head and has no pointer
-    assert "Mark" == a.head.value
-    assert a.head.pointer is None
-    b = dll.Dll()
-    # Confirm Attribute error with pop from empty list
+def test_pop(empty_dll, populated_dll):
+    """Test pop method with a populated and empty dll.
+    """
+    empty_dll.insert("Mark")
+    assert empty_dll.pop() == "Mark"
+    assert empty_dll.head is None
+    assert empty_dll.tail is None
+    # Confirm Attribute error with pop from empty dll
     with pytest.raises(AttributeError):
-        assert b.pop() is None
+        assert empty_dll.pop() is None
+    # Confirming pop from populated dll
+    assert populated_dll.pop() == "first"
+    assert populated_dll.head.next is None
+    assert populated_dll.head.previous.value == "third"
+    assert populated_dll.head.value == "second"
+    assert populated_dll.tail.value == 6
+    # pop from dll with one value
+
+
 
 
 # def test_remove():

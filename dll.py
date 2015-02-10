@@ -47,9 +47,20 @@ class Dll(object):
         self.count += 1
 
 
-    # def pop(self):
-    #     """"""
-
+    def pop(self):
+        """Removes value from head of dll."""
+        value = self.head.value
+        try:
+            if self.count > 1:
+                self.head = self.head.previous
+                self.head.next = None
+            else:
+                self.tail = None
+                self.head = None
+            self.count -= 1
+        except AttributeError:
+            AttributeError(u"DLL is empty.")
+        return value
 
     # def dequeue(self):
     #     """Returns a value of the front node and removes it from the queue
