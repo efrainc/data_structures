@@ -1,5 +1,6 @@
 #! /usr/bin/env python
-# Stack Python file for Efrain, Mark and Henry
+# Queue Python file for Efrain, Mark and Henry
+
 
 class Node(object):
     """A Node Class representing a Node in a queue.
