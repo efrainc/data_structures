@@ -62,6 +62,39 @@ class Dll(object):
             AttributeError(u"DLL is empty.")
         return value
 
+
+    def shift(self):
+        """Removes value from tail of dll."""
+        value = self.tail.value
+        try:
+            if self.count > 1:
+                self.tail = self.tail.next
+                self.tail.previous = None
+            else:
+                self.tail = None
+                self.head = None
+            self.count -= 1
+        except AttributeError:
+            AttributeError(u"DLL is empty.")
+        return value
+
+
+    def remove(self, val):
+        current_node = self.head      
+        while current_node:
+            if current_node.value == val:
+                if current_node == self.head:
+                    self.pop()
+                elif current_node == self.tail:
+                    self.shift()
+                else:
+                    current_node.next.previous = current_node.previous
+                    current_node.previous.next = current_node.next
+                self.count -= 1
+                return None
+            current_node = current_node.previous
+        raise AttributeError(u"Cannot find value")
+
     # def dequeue(self):
     #     """Returns a value of the front node and removes it from the queue
     #     If the qpopulated_queueueue is empty, return AttributeError."""

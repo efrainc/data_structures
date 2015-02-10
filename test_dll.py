@@ -93,9 +93,11 @@ def test_append(empty_dll, populated_dll):
     assert populated_dll.head.next is None
     assert populated_dll.tail.previous is None
 
+
 def test_pop(empty_dll, populated_dll):
     """Test pop method with a populated and empty dll.
     """
+    # pop from dll with one value
     empty_dll.insert("Mark")
     assert empty_dll.pop() == "Mark"
     assert empty_dll.head is None
@@ -109,9 +111,38 @@ def test_pop(empty_dll, populated_dll):
     assert populated_dll.head.previous.value == "third"
     assert populated_dll.head.value == "second"
     assert populated_dll.tail.value == 6
-    # pop from dll with one value
 
 
+
+def test_shift(empty_dll, populated_dll):
+    """Test shift method with a populated and empty dll.
+    """
+    # shift from dll with one value
+    empty_dll.insert("Mark")
+    assert empty_dll.shift() == "Mark"
+    assert empty_dll.head is None
+    assert empty_dll.tail is None
+    # Confirm Attribute error with shift from empty dll
+    with pytest.raises(AttributeError):
+        assert empty_dll.shift() is None
+    # Confirming shift from populated dll
+    assert populated_dll.shift() == 6
+    assert populated_dll.tail.previous is None
+    assert populated_dll.tail.next.value == "fourth"
+    assert populated_dll.head.value == "first"
+    assert populated_dll.tail.value == 5
+
+
+def test_remove(populated_dll):
+    """ Test remove with a populated and empty dll.
+    """
+    populated_dll.remove("third")
+    # Confirm Attribute error withn searching for val not in the dll
+    with pytest.raises(AttributeError):
+        assert populated_dll.remove("third") is None
+    with pytest.raises(AttributeError):
+        assert empty_dll.remove("test") is None
+    assert populated_dll.count == 5
 
 
 # def test_remove():
