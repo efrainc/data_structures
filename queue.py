@@ -6,7 +6,7 @@ class Node(object):
     Each node has a pointer to the next node and a value.
     """
 
-    def __init__(self, value, forw=None, back=None):
+    def __init__(self, value, back=None):
         """Create Node with value and optional pointer.
         If no pointer is specified, pointer is set to None.
         """
