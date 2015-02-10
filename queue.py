@@ -6,7 +6,7 @@ class Node(object):
     Each node has a pointer to the next node and a value.
     """
 
-    def __init__(self, value, forw=None, back=None):
+    def __init__(self, value, back=None):
         """Create Node with value and optional pointer.
         If no pointer is specified, pointer is set to None.
         """
@@ -27,7 +27,7 @@ class Queue(object):
     def enqueue(self, value):
         """Adds a node with the value to the back of the queue"""
         old_back = self.back
-        self.back = Node(value, self.back)  # set  Nodes next to the old back
+        self.back = Node(value)  # set  Nodes next to the old back
         if self.size() > 0:  # if any Nodes: set back previous to current Node
             old_back.point_previous = self.back
         else:  # adding to an empty, than define front
