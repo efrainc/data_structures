@@ -33,22 +33,21 @@ def test_init():
 
 
 def test_insert(empty_dll, populated_dll):
-    """Test insert by adding node to empty list and
-
-    adding list with exisiting nodes."""
+    """Test insert by adding node to empty and populated dll
+    """
     # adding to an empty doubly link list
     empty_dll.insert("Mark")
     assert "Mark" == empty_dll.head.value
     assert "Mark" == empty_dll.tail.value
     assert empty_dll.head.next is None
-    assert empty_dll.head.tail is None
+    assert empty_dll.head.previous is None
     empty_dll.insert(3)
     assert 3 == empty_dll.head.value
     assert "Mark" == empty_dll.tail.value
     assert "Mark" == empty_dll.head.previous
     assert empty_dll.tail.next == 3
     assert empty_dll.head.next is None
-    assert empty_dll.head.tail == "Mark"
+    assert empty_dll.head.previous == "Mark"
     # Test insert into populated list.
     populated_dll.insert("Henry")
     assert "Henry" == populated_dll.head.value
@@ -60,6 +59,38 @@ def test_insert(empty_dll, populated_dll):
     assert "first" == populated_dll.tail.value
     assert "Henry" == populated_dll.head.previous
     assert populated_dll.head.next is None
+
+
+def test_append(empty_dll, populated_dll):
+    """Test append by adding node to empty and populated dll
+    """
+    # adding to an empty doubly link list
+    empty_dll.append("Mark")
+    assert "Mark" == empty_dll.head.value
+    assert "Mark" == empty_dll.tail.value
+    assert empty_dll.head.next is None
+    assert empty_dll.head.previous is None
+    empty_dll.append(3)
+    assert "Mark" == empty_dll.head.value
+    assert 3 == empty_dll.tail.value
+    assert 3 == empty_dll.head.previous
+    assert empty_dll.tail.next == "Mark"
+    assert empty_dll.head.next is None
+    assert empty_dll.head.previous == 3
+    # Test append into populated list.
+    populated_dll.append("Henry")
+    assert "first" == populated_dll.head.value
+    assert "Henry" == populated_dll.tail.value
+    assert populated_dll.tail.previous is None
+    assert "second" == populated_dll.head.previous
+    assert populated_dll.head.next is None
+    populated_dll.append("Efrain")
+    assert "first" == populated_dll.head.value
+    assert "Efrain" == populated_dll.tail.value
+    assert "second" == populated_dll.head.previous
+    assert "Henry" == populated_dll.tail.next
+    assert populated_dll.head.next is None
+    assert populated_dll.tail.previous is None
 
 def test_pop():
     """Test pop method with a populated and empty list.
