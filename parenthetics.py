@@ -23,15 +23,12 @@ def parenthetics(text):
 
     # number of open parens
     parens = stack.Stack()
-
-    text_list = list(text)
-
-    while text_list:
-        element = text_list.pop(0)
-        if element == ')' and parens.top:  # case ) and ( on stack, pop one off
-            parens.pop()
-        elif element == ')':  # case of ), but no ( on stack then "broken"
-            return -1
+    for element in text:
+        if element == ')':  # case ) and ( on stack, pop one off
+            try:
+                parens.pop()
+            except AttributeError:
+                return -1  # case of ), but no ( on stack then "broken"
         elif element == '(':  # case of (, push a ( onto stack
             parens.push('(')  # doesn't matter what value is
     if parens.top:
