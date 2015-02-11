@@ -27,18 +27,20 @@ def test_push(empty_binheap, populated_binheap):
 
 
 
-# def test_pop(empty_binheap, populated_binheap):
-#     """Test pop with large and small numbers to empty and populated binheaps."""
-#     with pytest.raises(AttributeError):
-#         assert empty_binheap.pop() is None
-#     assert populated_binheap.pop() == 9
-#     assert populated_binheap.pop() == 8
-#     assert populated_binheap.pop() == 7
-#     assert populated_binheap.pop() == 6
-#     assert populated_binheap.pop() == 5
-#     assert populated_binheap.pop() == 4
-#     assert populated_binheap.pop() == 3
-#     assert populated_binheap.pop() == 2
+def test_pop(empty_binheap, populated_binheap):
+    """Test pop with large and small numbers to empty and populated binheaps."""
+    with pytest.raises(IndexError):
+        assert empty_binheap.pop() is None
+    assert populated_binheap.pop() == 9
+    assert populated_binheap.pop() == 8
+    assert populated_binheap.pop() == 7
+    assert populated_binheap.pop() == 6
+    assert populated_binheap.pop() == 5
+    assert populated_binheap.pop() == 4
+    assert populated_binheap.pop() == 3
+    assert populated_binheap.pop() == 2
+    with pytest.raises(IndexError):
+        assert populated_binheap.pop() is None
 
 
 
