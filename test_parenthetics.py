@@ -5,7 +5,7 @@ import parenthetics as p
 
 def test_parenthetics_open():
     """Tests a string with:
-    open parens that are not closed.
+    open parens that are not properly closed.
     """
     cases = ["(", "(((((a))))", "((a", "(a(a)", "(a)b(bb",
              "(b)(b(b)", "((bbb)cc((bbb))"]
