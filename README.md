@@ -41,6 +41,16 @@ Doubly-Linked-List(dll)
     it is faster to remove an item from the line. This is also the case
     for a print queue, where'd we want to remove a job from the queue.
 
+Binary Heap
+    A binary heap is a data structure that uses a binary tree where each
+    node has a left and a right child. Every node also has a parent except
+    the top node. Data is added to them from left to right. All nodes in a
+    binary tree are either >= than every one of its children or <= all every
+    one of its children. The one that we have implemented here is the case
+    where all children are <= their parents. This binary heap has a push
+    which pushes a new value onto the tree and a pop which pops a value off
+    off the tree returning its value and deleting it.
+
 
 Resources:
     None
