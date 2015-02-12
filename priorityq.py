@@ -17,7 +17,7 @@ class Pq(object):
         if priority >= 3:
             self.three.enqueue(value)
         elif priority <= 1:
-            self.one.equeue(value)
+            self.one.enqueue(value)
         else:
             self.two.enqueue(value)
 
