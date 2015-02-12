@@ -26,7 +26,6 @@ def test_push(empty_binheap, populated_binheap):
         assert populated_binheap.items[item] == h_list[item]
 
 
-
 def test_pop(empty_binheap, populated_binheap):
     """Test pop with large and small numbers to empty and populated binheaps."""
     with pytest.raises(IndexError):
@@ -43,13 +42,15 @@ def test_pop(empty_binheap, populated_binheap):
         assert populated_binheap.pop() is None
 
 
-
 @pytest.fixture(scope='function')
 def empty_binheap():
+    """Create empty binary heap"""
     return binheap.Binheap()
+
 
 @pytest.fixture(scope='function')
 def populated_binheap():
+    """Create populated binary heap 2 though 9"""
     populated = binheap.Binheap()
     for x in range(2, 10):
         populated.push(x)
