@@ -14,7 +14,6 @@ class Binheap(object):
 
     def pop(self):
         """Remove top value from the binheap."""
-        print "sort algorythm: %s" % self.items
         if len(self.items) > 1:
             top = self.items[0]
             self.items[0] = self.items.pop()
