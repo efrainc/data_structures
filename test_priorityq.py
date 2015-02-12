@@ -2,8 +2,8 @@ import pytest
 import priorityq
 
 
-def test_insert(empty_pqueue):
-    """Test adding items to the list with correct priority"""
+def test_insert_peek(empty_pqueue):
+    """Test adding items to the list with correct priority and peeking."""
     # tests that adding lower priority doesn't change first
     empty_pqueue.insert(1, 1)
     assert empty_pqueue.peek() == 1
@@ -11,10 +11,17 @@ def test_insert(empty_pqueue):
     assert empty_pqueue.peek() == 1
     empty_pqueue.insert(3, 3)
     assert empty_pqueue.peek() == 1
+    # test add value with priority greater than number initial priority range
+    empty_pqueue.insert(4, 15)
+    assert empty_pqueue.peek() == 1
     # tests that lower priorities were inserted correctly
     assert empty_pqueue.pop() == 1
     assert empty_pqueue.pop() == 2
     assert empty_pqueue.pop() == 3
+    assert empty_pqueue.pop() == 4
+    # test peeking at empty queue raises error
+    with pytest.raises(AttributeError):
+        empty_pqueue.peek()
     # tests that adding higher priority is returned first
     empty_pqueue.insert(1, 3)
     assert empty_pqueue.peek() == 1
@@ -31,12 +38,6 @@ def test_pop(populated_pqueue):
         assert populated_pqueue.pop() == x
     with pytest.raises(AttributeError):
         populated_pqueue.pop()
-
-
-def test_peek():
-    """Displays the highest prioritiy item without removing
-    it from the list"""
-    pass
 
 
 @pytest.fixture(scope='function')
