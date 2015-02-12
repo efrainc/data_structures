@@ -46,6 +46,13 @@ class Queue(object):
         self.count -= 1
         return val
 
+    def peek(self):
+        """Returns a value of the front node"""
+        try:
+            return self.front.value
+        except AttributeError:
+            raise AttributeError(u"Queue is empty")
+
     def size(self):
         """Returns the size of the queue"""
         return self.count
