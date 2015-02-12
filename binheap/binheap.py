@@ -14,9 +14,14 @@ class Binheap(object):
 
     def pop(self):
         """Remove top value from the binheap."""
-        top = self.items[0]
-        self.sort_top()
-        return top
+        print "sort algorythm: %s" % self.items
+        if len(self.items) > 1:
+            top = self.items[0]
+            self.items[0] = self.items.pop()
+            self.sort_top()
+            return top
+        else:
+            return self.items.pop()
 
     def parent(self, position):
         """Return parent of current position."""
@@ -75,16 +80,9 @@ class Binheap(object):
         temp = 0
         while True:
             try:
-                self.find_max_child(temp)
-                self.switch(temp, self.find_max_child(temp))
-                temp = self.find_max_child(temp)
+                temp_child = self.find_max_child(temp)
+                if self.items[temp] < self.items[temp_child]:
+                    self.switch(temp, temp_child)
+                temp = temp_child
             except TypeError:
-                self.items.pop()
                 break
-
-
-
-
-
-
-

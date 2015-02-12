@@ -30,9 +30,13 @@ def test_pop(empty_binheap, populated_binheap):
     """Test pop with large and small numbers to empty and populated binheaps."""
     with pytest.raises(IndexError):
         assert empty_binheap.pop() is None
+    print populated_binheap.items
     assert populated_binheap.pop() == 9
+    print populated_binheap.items
     assert populated_binheap.pop() == 8
+    print populated_binheap.items
     assert populated_binheap.pop() == 7
+    print populated_binheap.items
     assert populated_binheap.pop() == 6
     assert populated_binheap.pop() == 5
     assert populated_binheap.pop() == 4
