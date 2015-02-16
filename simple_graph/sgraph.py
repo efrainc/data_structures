@@ -47,6 +47,10 @@ class Sgraph(object):
         """deletesthenode'n' from the graph, raises an error if no such node exists"""
         try:
             del self.dict[n]
+            # remove edges pointing to n
+            for value in self.dict.itervalues():
+                if n in value:
+                    value.remove(n)
         except (ValueError, KeyError):
                 raise AttributeError('No Such Node Exists')
 
