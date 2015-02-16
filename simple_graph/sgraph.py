@@ -18,9 +18,9 @@ class Sgraph(object):
     def edges(self):
         """return a list of all edges in the graph"""
         output = []
-        for k, v in self.dict:
+        for k, v in self.dict.iteritems():
             for val in v:
-                output.append((k, val))
+                output.append((k, val),)
         return output
 
     def add_node(self, node):
