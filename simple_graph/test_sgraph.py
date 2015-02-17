@@ -3,12 +3,12 @@ import sgraph
 
 
 def test___init__():
-    """ Test Instantiates simple graph"""
-    assert False
+    """Test instantiates simple graph"""
+    assert sgraph.Sgraph().dict
 
 
 def test_nodes(empty_graph, populated_graph):
-    """ Test return list of all nodes in a graph"""
+    """Test return list of all nodes in a graph"""
     assert empty_graph.nodes() == []
     l = ['a', 'b', 'c', 'd', 'e']
     sortedlist = populated_graph.nodes()
@@ -17,7 +17,7 @@ def test_nodes(empty_graph, populated_graph):
 
 
 def test_edges(populated_graph):
-    """ Test return a list of all edges in the graph"""
+    """Test return a list of all edges in the graph"""
     edges = [('a', 'b'), ('b', 'c'), ('c', 'b'),
              ('c', 'a'), ('b', 'd'), ('d', 'c')]
     for edge in edges:
@@ -25,19 +25,19 @@ def test_edges(populated_graph):
 
 
 def test_add_node_empty(empty_graph):
-    """ Test adds a new node 'n' to the empty graph"""
+    """Test adds a new node 'n' to the empty graph"""
     empty_graph.add_node('a')
     assert empty_graph.has_node('a')
 
 
 def test_add_node_populated(populated_graph):
-    """ Test adds a new node 'n' to the populated graph"""
+    """Test adds a new node 'n' to the populated graph"""
     populated_graph.add_node('g')
     assert populated_graph.has_node('g')
 
 
 def test_has_node(empty_graph, populated_graph):
-    """ Test True if node 'n' is contained in the graph, False if not."""
+    """Test True if node 'n' is contained in the graph, False if not."""
     assert empty_graph.has_node('a') is False
     l = ['a', 'b', 'c', 'd', 'e']
     for node in l:
@@ -45,8 +45,8 @@ def test_has_node(empty_graph, populated_graph):
     assert populated_graph.has_node('t') is False
 
 
-def test_add_edge_empty(empty_graph, populated_graph):
-    """ Test Adds a new edge to the graph connecting 'n1' and 'n2', if either n1 or n2 are not
+def test_add_edge_empty(empty_graph):
+    """Test Adds a new edge to the graph connecting 'n1' and 'n2', if either n1 or n2 are not
     already present in the graph, they should be added."""
     empty_graph.add_edge('a', 'b')
     assert empty_graph.has_node('a')
@@ -55,42 +55,50 @@ def test_add_edge_empty(empty_graph, populated_graph):
 
 
 def test_del_node_empty(empty_graph):
-    """ Test deletesthenode'n' from the graph, raises an error if no such node exists"""
+    """Test deletesthenode'n' from the graph, raises an error if no such node exists"""
     with pytest.raises(AttributeError):
         empty_graph.del_node('a')
 
 
 def test_del_node_populated(populated_graph):
-    """ Test deletesthenode'n' from the graph, raises an error if no such node exists"""
+    """Test deletesthenode'n' from the graph, raises an error if no such node exists"""
     populated_graph.del_node('a')
     assert not populated_graph.has_node('a')
     assert 'a' not in populated_graph.dict['c']
 
 
 def test_del_edge_empty(empty_graph):
-    """ Test deletes the edge connecting non-existing 'n1' and 'n2' from the graph,
+    """Test deletes the edge connecting non-existing 'n1' and 'n2' from the graph,
     raises an error if no such edge exists"""
     with pytest.raises(AttributeError):
         empty_graph.del_edge('a', 'b')
 
 
 def test_del_edge_empty(populated_graph):
-    """ Test deletes the edge connecting 'n1' and 'n2' from the graph"""
+    """Test deletes the edge connecting 'n1' and 'n2' from the graph"""
     populated_graph.del_edge('a', 'b')
     assert 'b' not in populated_graph.dict['a']
 
 
 def test_neighbors(populated_graph):
-    """ Test returns the list of all nodes connected to 'n' by edges, raises an error if n is not in g"""
+    """Test returns the list of all nodes connected to 'n' by edges, raises an error if n is not in g"""
     l = ['a', 'b', 'd']
     for node in l:
         assert node in populated_graph.neighbors('c')
 
 
-def test_adjacent(empty_graph, populated_graph):
-    """ Test returns True if there is an edge connecting n1 and n2, False if not, raises an error if
+def test_adjacent_empty(empty_graph):
+    """Test returns True if there is an edge connecting n1 and n2, False if not, raises an error if
     either of the supplied nodes are not in g"""
-    assert False
+    with pytest.raises(KeyError):
+        empty_graph.adjacent('a', 'b')
+
+
+def test_adjacent_pop(populated_graph):
+    """Test returns True if there is an edge connecting n1 and n2, False if not, raises an error if
+    either of the supplied nodes are not in g"""
+    assert populated_graph.adjacent('a', 'b')
+    assert not populated_graph.adjacent('a', 'd')
 
 
 @pytest.fixture(scope='function')
