@@ -80,9 +80,11 @@ def test_del_edge_empty(populated_graph):
     assert 'b' not in populated_graph.dict['a']
 
 
-def test_neighbors(empty_graph, populated_graph):
+def test_neighbors(populated_graph):
     """ Test returns the list of all nodes connected to 'n' by edges, raises an error if n is not in g"""
-    assert False
+    l = ['a', 'b', 'd']
+    for node in l:
+        assert node in populated_graph.neighbors('c')
 
 
 def test_adjacent(empty_graph, populated_graph):
