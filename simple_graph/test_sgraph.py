@@ -3,7 +3,7 @@ import sgraph
 
 
 def test___init__():
-    """Test instantiates simple graph"""
+    """Test instantiates simple graph with dictionary."""
     assert sgraph.Sgraph().dict
 
 

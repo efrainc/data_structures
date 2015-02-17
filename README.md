@@ -51,18 +51,21 @@ Binary Heap
     which pushes a new value onto the tree and a pop which pops a value off
     off the tree returning its value and deleting it.
 
-    Priority Queue
-
+Priority Queue
     The same as a queue, but with the added feature, priority. You you pop
     from the PQ, it pops the highest (lowest number) priority item.  If there
-    are multiple items with the same priority, first in first out applies. 
-    This implementation has insert, pop and peek(look at most important item 
-    but do not remove it) methods. This implementation uses a separate Queue 
+    are multiple items with the same priority, first in first out applies.
+    This implementation has insert, pop and peek(look at most important item
+    but do not remove it) methods. This implementation uses a separate Queue
     for each priority level, so no sorting is required.
 
-
-Resources:
-    None
+Simple Graph
+    A simple, direct, unweighted graph is a group of nodes without required
+    pointeres/edges. Cyclic paths can exist and nodes with no pointers can
+    exist. This implementation uses a dictionary to keep track of nodes as keys
+    and edges as values in lists.
+    The following reference was used to guide our design:
+    https://www.python.org/doc/essays/graphs/
 
 Collaborations:
     None
