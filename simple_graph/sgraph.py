@@ -64,11 +64,14 @@ class Sgraph(object):
     def neighbors(self, n):
         """Returns the list of all nodes connected to 'n' by edges,
         raise error if n is not in g."""
-        out = self.dict[n]
-        for keys, values in self.dict.items():
-            if n in values:
-                out.append(keys)
-        return set(out)
+        try:
+            out = self.dict[n]
+            for keys, values in self.dict.items():
+                if n in values:
+                    out.append(keys)
+            return set(out)
+        except KeyError:
+            raise KeyError('Node not in graph.')
 
     def adjacent(self, n1, n2):
         """returns True if there is an edge connecting n1 and n2, False if not,

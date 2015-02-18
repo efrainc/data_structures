@@ -63,7 +63,7 @@ Simple Graph
     A simple, direct, unweighted graph is a group of nodes without required
     pointeres/edges. Cyclic paths can exist and nodes with no pointers can
     exist. This implementation uses a dictionary to keep track of nodes as keys
-    and edges as values in lists.
+    and edges as values in lists. Nodes must be hashable values.
     The following reference was used to guide our design:
     https://www.python.org/doc/essays/graphs/
 
