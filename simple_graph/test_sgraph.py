@@ -4,7 +4,7 @@ import sgraph
 
 def test___init__():
     """Test instantiates simple graph with dictionary."""
-    assert sgraph.Sgraph().dict
+    assert sgraph.Sgraph().dict == {}
 
 
 def test_nodes(empty_graph, populated_graph):

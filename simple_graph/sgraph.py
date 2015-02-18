@@ -17,17 +17,18 @@ class Sgraph(object):
 
     def edges(self):
         """return a list of all edges in the graph"""
-        output = []
-        for k, v in self.dict.iteritems():
-            for val in v:
-                output.append((k, val),)
-        return output
+        return [(k, val) for k, v in self.dict.iteritems() for val in v]
+        # output = []
+        # for k, v in self.dict.iteritems():
+        #     for val in v:
+        #         output.append((k, val),)
+        # return output
 
     def add_node(self, node):
-        """adds a new node 'n' to the graph"""
+        """adds a new node 'n' to the graph. Nodes must be hashable values."""
         try:
-            self.dict[node] = []
-        except AttributeError:
+            self.dict.setdefault(node, [])
+        except (AttributeError, TypeError):
             raise "Node Value must be unique non-integer"
 
     def has_node(self, n):
@@ -37,10 +38,8 @@ class Sgraph(object):
     def add_edge(self, n1, n2):
         """Adds a new edge to the graph connecting 'n1' and 'n2', if either n1
         or n2 are not already present in the graph, they should be added."""
-        if not self.has_node(n1):
-            self.add_node(n1)
-        if not self.has_node(n2):
-            self.add_node(n2)
+        self.add_node(n1)
+        self.add_node(n2)
         self.dict[n1].append(n2)
 
     def del_node(self, n):
