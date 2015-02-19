@@ -82,7 +82,7 @@ def test_del_edge_empty(populated_graph):
 
 def test_neighbors(populated_graph):
     """Test returns the list of all nodes connected to 'n' by edges, raises an error if n is not in g"""
-    l = ['a', 'b', 'd']
+    l = ['a', 'b']
     for node in l:
         assert node in populated_graph.neighbors('c')
 

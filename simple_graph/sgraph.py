@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+    #! /usr/bin/env python
 
 # Simple Graph project for Efrain, Henry, Mark
 # Graph is unweighted but directed
@@ -36,7 +36,7 @@ class Sgraph(object):
         return n in self.dict
 
     def add_edge(self, n1, n2):
-        """Adds a new edge to the graph connecting 'n1' and 'n2', if either n1
+        """Adds a new edge to the graph connecting 'n1' to 'n2', if either n1
         or n2 are not already present in the graph, they should be added."""
         self.add_node(n1)
         self.add_node(n2)
@@ -62,14 +62,11 @@ class Sgraph(object):
             raise AttributeError('No Such Edge Exists')
 
     def neighbors(self, n):
-        """Returns the list of all nodes connected to 'n' by edges,
+        """Returns the list of all nodes with edges leading to them from n,
         raise error if n is not in g."""
+
         try:
-            out = self.dict[n]
-            for keys, values in self.dict.items():
-                if n in values:
-                    out.append(keys)
-            return set(out)
+            return self.dict[n]
         except KeyError:
             raise KeyError('Node not in graph.')
 
@@ -77,6 +74,6 @@ class Sgraph(object):
         """returns True if there is an edge connecting n1 and n2, False if not,
         raises an error if either of the supplied nodes are not in g."""
         try:
-            return n2 in self.dict[n1] or n1 in self.dict[n2]
+            return n2 in self.dict[n1]
         except KeyError:
             raise KeyError('Node(s) not in graph.')
