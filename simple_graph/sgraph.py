@@ -1,4 +1,4 @@
-    #! /usr/bin/env python
+#! /usr/bin/env python
 
 # Simple Graph project for Efrain, Henry, Mark
 # Graph is unweighted but directed
@@ -18,11 +18,6 @@ class Sgraph(object):
     def edges(self):
         """return a list of all edges in the graph"""
         return [(k, val) for k, v in self.dict.iteritems() for val in v]
-        # output = []
-        # for k, v in self.dict.iteritems():
-        #     for val in v:
-        #         output.append((k, val),)
-        # return output
 
     def add_node(self, node):
         """adds a new node 'n' to the graph. Nodes must be hashable values."""
@@ -77,3 +72,32 @@ class Sgraph(object):
             return n2 in self.dict[n1]
         except KeyError:
             raise KeyError('Node(s) not in graph.')
+
+    def depth_first_traversal(self, start, visited=[]):
+        """Perform a full depth-first traversal of the graph beginning at start.
+        Return the path when complete."""
+        if start not in visited:
+            visited.append(start)
+            for i in self.neighbors(start):
+                self.depth_first_traversal(i, visited)
+            return visited
+
+
+    def breath_first_traversal(self, start):
+        """Perform a full breadth-first traversal of the graph beginning at start.
+        Return the path when complete."""
+
+    def recursive(self, current_node, visited=[]):
+        if current_node not in visited:
+            visited.append(current_node)
+            for i in self.neighbors(current_node):
+                self.recursive(i, visited)
+            return visited
+
+
+
+
+
+
+
+

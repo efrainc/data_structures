@@ -100,6 +100,9 @@ def test_adjacent_pop(populated_graph):
     assert populated_graph.adjacent('a', 'b')
     assert not populated_graph.adjacent('a', 'd')
 
+def test_depth_first_traversal(depth_populated_graph):
+    assert depth_populated_graph.depth_first_traversal('a') == ['a', 'b', 'd', 'f', 'e', 'c', 'g']
+
 
 @pytest.fixture(scope='function')
 def empty_graph():
@@ -116,5 +119,19 @@ def populated_graph():
         'c': ['b', 'a'],
         'd': ['c'],
         'e': []
+        }
+    return graph
+
+@pytest.fixture(scope='function')
+def depth_populated_graph():
+    graph = sgraph.Sgraph()
+    graph.dict = {
+        'a': ['b', 'c', 'e'],
+        'b': ['d', 'f'],
+        'c': ['g'],
+        'd': [],
+        'e': [],
+        'f': ['e'],
+        'g': []
         }
     return graph
