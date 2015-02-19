@@ -135,3 +135,18 @@ def depth_populated_graph():
         'g': []
         }
     return graph
+
+@pytest.fixture(scope='function')
+def breadth_populated_graph():
+    graph = sgraph.Sgraph()
+    graph.dict = {
+        'a': ['b', 'c'],
+        'b': ['d', 'e'],
+        'c': ['f', 'g'],
+        'd': [],
+        'e': ['h'],
+        'f': [],
+        'g': [],
+        'h': [],
+        }
+    return graph

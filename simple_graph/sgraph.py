@@ -3,7 +3,6 @@
 # Simple Graph project for Efrain, Henry, Mark
 # Graph is unweighted but directed
 
-
 class Sgraph(object):
     """A class defining a unweighted direct simple graph."""
 
@@ -83,18 +82,25 @@ class Sgraph(object):
             return visited
 
 
-    def breath_first_traversal(self, start):
+    def breath_first_traversal(self, start, visited=[]):
         """Perform a full breadth-first traversal of the graph beginning at start.
         Return the path when complete."""
+        if start not in visited:
+            visited.append(start)
+        start_visited = visited
+        while True:
+            visited = self.get_all_neighbors(start_visited, visited)
+            start_visited = visited-start_visited
+            if visited-start_visited == None:
+                break
 
-    def recursive(self, current_node, visited=[]):
-        if current_node not in visited:
-            visited.append(current_node)
-            for i in self.neighbors(current_node):
-                self.recursive(i, visited)
-            return visited
-
-
+    def get_all_neighbors(self, start_visited, visited):
+        """for all neighors in node, return list of"""
+        for node_ in start_visited:
+            for i in self.neighbors(node_):
+                if i not in visited:
+                    visited.append(i)
+        return visited
 
 
 
