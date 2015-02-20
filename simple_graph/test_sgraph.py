@@ -101,8 +101,16 @@ def test_adjacent_pop(populated_graph):
     assert not populated_graph.adjacent('a', 'd')
 
 def test_depth_first_traversal(depth_populated_graph):
+    """Test the depth first tranversal approach for a graph of arbitrary length"""
     assert depth_populated_graph.depth_first_traversal('a') == ['a', 'b', 'd', 'f', 'e', 'c', 'g']
 
+def test_breadth_first_traversal(breadth_populated_graph):
+    """Test the breadth first tranversal approach for a graph of arbitrary length"""
+    assert breadth_populated_graph.breadth_first_traversal('a') == ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+
+def test_breadth_with_cycle(populated_graph):
+    """Test the depth first tranversal approach for a graph of arbitrary length and a cycle"""
+    assert populated_graph.breadth_first_traversal('a') == ['a', 'b', 'c', 'd']
 
 @pytest.fixture(scope='function')
 def empty_graph():

@@ -68,5 +68,13 @@ Simple Graph
     The following reference was used to guide our design:
     https://www.python.org/doc/essays/graphs/
 
+Simple Graph Traversal
+    Two traversal methods, for a simple graph. The two methods are depth first
+    and breadth first. Depth first starts with the root and attempts to explore
+    as far possible in each branch before backtracking. Breadth first visits each
+    neighbor before attempting to visit the next level down. Both methods support
+    cyclic graphs. The following reference was used to guide our design:
+    http://en.wikipedia.org/wiki/Graph_traversal
+
 Collaborations:
     None

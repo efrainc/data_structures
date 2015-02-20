@@ -3,6 +3,19 @@
 # Simple Graph project for Efrain, Henry, Mark
 # Graph is unweighted but directed
 
+import time
+
+def timed_func(func):
+    """Decorator for timing our traversal methods."""
+    def timed(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        elapsed = time.time() - start
+        print "time expired: %s" % elapsed
+        return result
+    return timed
+
+
 class Sgraph(object):
     """A class defining a unweighted direct simple graph."""
 
@@ -23,7 +36,7 @@ class Sgraph(object):
         try:
             self.dict.setdefault(node, [])
         except (AttributeError, TypeError):
-            raise "Node Value must be unique non-integer"
+            raise "Node Value must be hashable value"
 
     def has_node(self, n):
         """True if node 'n' is contained in the graph, False if not."""
@@ -72,35 +85,80 @@ class Sgraph(object):
         except KeyError:
             raise KeyError('Node(s) not in graph.')
 
-    def depth_first_traversal(self, start, visited=[]):
+    @timed_func
+    def depth_first_traversal(self, start):
         """Perform a full depth-first traversal of the graph beginning at start.
         Return the path when complete."""
+        return self.recursive_dft(start, [])
+
+
+    def recursive_dft(self, start, visited=[]):
+        """Recursive function for depth first traversal."""
         if start not in visited:
             visited.append(start)
             for i in self.neighbors(start):
-                self.depth_first_traversal(i, visited)
+                self.recursive_dft(i, visited)
             return visited
 
-
-    def breath_first_traversal(self, start, visited=[]):
+    @timed_func
+    def breadth_first_traversal(self, start):
         """Perform a full breadth-first traversal of the graph beginning at start.
         Return the path when complete."""
-        if start not in visited:
-            visited.append(start)
+        visited = []
+        visited.append(start)
         start_visited = visited
         while True:
-            visited = self.get_all_neighbors(start_visited, visited)
-            start_visited = visited-start_visited
-            if visited-start_visited == None:
+            temp = []
+            for node_ in start_visited:
+                for i in self.neighbors(node_):
+                    if i not in visited:
+                        visited.append(i)
+                        temp.append(i)
+            start_visited = temp
+            if not temp:
                 break
-
-    def get_all_neighbors(self, start_visited, visited):
-        """for all neighors in node, return list of"""
-        for node_ in start_visited:
-            for i in self.neighbors(node_):
-                if i not in visited:
-                    visited.append(i)
         return visited
+
+
+def populated_graph():
+    graph = Sgraph()
+    graph.dict = {
+        'a': ['b'],
+        'b': ['c', 'd'],
+        'c': ['b', 'a'],
+        'd': ['c'],
+        'e': []
+        }
+    return graph
+
+def depth_populated_graph():
+    graph = Sgraph()
+    graph.dict = {
+        'a': ['b', 'c', 'e'],
+        'b': ['d', 'f'],
+        'c': ['g'],
+        'd': [],
+        'e': [],
+        'f': ['e'],
+        'g': []
+        }
+    return graph
+
+
+if __name__ == '__main__':
+    temp = populated_graph()
+    print "breadth"
+    temp.breadth_first_traversal('a')
+    print "depth"
+    print temp.depth_first_traversal('a')
+
+    temp2= depth_populated_graph()
+    print "depth_larger_cylce"
+    print temp2.depth_first_traversal('a')
+    print "breadth_larger_cycle"
+    print temp2.breadth_first_traversal('a')
+
+
 
 
 
