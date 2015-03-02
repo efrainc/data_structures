@@ -1,6 +1,6 @@
 import pytest
 import weighted_graph as wgraph
-
+from collections import OrderedDict
 
 def test___init__():
     """Test instantiates simple graph with dictionary."""
@@ -48,11 +48,10 @@ def test_has_node(empty_graph, populated_graph):
 def test_add_edge_empty(empty_graph):
     """Test Adds a new edge to the graph connecting 'n1' and 'n2', if either n1 or n2 are not
     already present in the graph, they should be added."""
-    empty_graph.add_edge('a', 'b')
+    empty_graph.add_edge('a', 'b', 7)
     assert empty_graph.has_node('a')
     assert empty_graph.has_node('b')
-    assert empty_graph.dict['a'] == ['b']
-
+    assert empty_graph.dict['a'] == {'b': 7}
 
 def test_del_node_empty(empty_graph):
     """Test deletesthenode'n' from the graph, raises an error if no such node exists"""
@@ -103,11 +102,13 @@ def test_adjacent_pop(populated_graph):
 
 def test_depth_first_traversal(depth_populated_graph):
     """Test the depth first tranversal approach for a graph of arbitrary length"""
-    assert depth_populated_graph.depth_first_traversal('a') == ['a', 'b', 'd', 'f', 'e', 'c', 'g']
+    print "depth: " + str(depth_populated_graph.depth_first_traversal('a'))
+    assert depth_populated_graph.depth_first_traversal('a') == ['a', 'c', 'g', 'b', 'd', 'f', 'e']
 
 def test_breadth_first_traversal(breadth_populated_graph):
     """Test the breadth first tranversal approach for a graph of arbitrary length"""
-    assert breadth_populated_graph.breadth_first_traversal('a') == ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    print "breadth: " + str(breadth_populated_graph.breadth_first_traversal('a'))
+    assert breadth_populated_graph.breadth_first_traversal('a') == ['a', 'c', 'b', 'g', 'f', 'e', 'd', 'h']
 
 def test_breadth_with_cycle(populated_graph):
     """Test the depth first tranversal approach for a graph of arbitrary length and a cycle"""
@@ -123,11 +124,11 @@ def empty_graph():
 def populated_graph():
     graph = wgraph.Wgraph()
     graph.dict = {
-        'a': ['b'],
-        'b': ['c', 'd'],
-        'c': ['b', 'a'],
-        'd': ['c'],
-        'e': []
+        'a': OrderedDict([('b', 1)]),
+        'b': OrderedDict([('c', 2), ('d', 4)]),
+        'c': OrderedDict([('b', 5), ('a', 3)]),
+        'd': OrderedDict([('c', 6)]),
+        'e': OrderedDict()
         }
     return graph
 
@@ -135,13 +136,13 @@ def populated_graph():
 def depth_populated_graph():
     graph = wgraph.Wgraph()
     graph.dict = {
-        'a': ['b', 'c', 'e'],
-        'b': ['d', 'f'],
-        'c': ['g'],
-        'd': [],
-        'e': [],
-        'f': ['e'],
-        'g': []
+        'a': {'b': 1, 'c': 2, 'e': 3},
+        'b': {'d': 4, 'f': 5},
+        'c': {'g': 6},
+        'd': {},
+        'e': {},
+        'f': {'e': 7},
+        'g': {}
         }
     return graph
 
@@ -149,13 +150,13 @@ def depth_populated_graph():
 def breadth_populated_graph():
     graph = wgraph.Wgraph()
     graph.dict = {
-        'a': ['b', 'c'],
-        'b': ['d', 'e'],
-        'c': ['f', 'g'],
-        'd': [],
-        'e': ['h'],
-        'f': [],
-        'g': [],
-        'h': [],
+        'a': {'b': 1, 'c': 2},
+        'b': {'d': 3, 'e': 4},
+        'c': {'f': 5, 'g': 6},
+        'd': {},
+        'e': {'h': 7},
+        'f': {},
+        'g': {},
+        'h': {},
         }
     return graph

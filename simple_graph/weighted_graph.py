@@ -4,6 +4,8 @@
 # Graph is unweighted but directed
 
 import time
+from collections import OrderedDict
+
 
 def timed_func(func):
     """Decorator for timing our traversal methods."""
@@ -34,7 +36,8 @@ class Wgraph(object):
     def add_node(self, node):
         """adds a new node 'n' to the graph. Nodes must be hashable values."""
         try:
-            self.dict.setdefault(node, {})
+            ordered_dict = OrderedDict()
+            self.dict.setdefault(node, ordered_dict)
         except (AttributeError, TypeError):
             raise "Node Value must be hashable value"
 
@@ -42,7 +45,7 @@ class Wgraph(object):
         """True if node 'n' is contained in the graph, False if not."""
         return n in self.dict
 
-    def add_edge(self, n1, n2, weight):
+    def add_edge(self, n1, n2, weight=0):
         """Adds a new edge to the graph connecting 'n1' to 'n2', if either n1
         or n2 are not already present in the graph, they should be added."""
         self.add_node(n1)
@@ -54,9 +57,9 @@ class Wgraph(object):
         try:
             del self.dict[n]
             # remove edges pointing to n
-            for value in self.dict.itervalues():
+            for key, value in self.dict.iteritems():
                 if n in value:
-                    value.remove(n)
+                    del self.dict[key][n]
         except (ValueError, KeyError):
                 raise AttributeError('No Such Node Exists')
 
@@ -73,7 +76,7 @@ class Wgraph(object):
         raise error if n is not in g."""
 
         try:
-            return self.dict[n]
+            return self.dict[n].keys()
         except KeyError:
             raise KeyError('Node not in graph.')
 
