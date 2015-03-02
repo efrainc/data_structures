@@ -85,7 +85,7 @@ def test_neighbors(populated_graph):
     l = ['a', 'b']
     for node in l:
         assert node in populated_graph.neighbors('c')
-        assert False
+
 
 
 def test_adjacent_empty(empty_graph):
