@@ -1,5 +1,5 @@
 # data_structures
-[![Travis](https://travis-ci.org/efrainc/data_structures.svg?branch=weighted_graph)](https://travis-ci.org/efrainc/data_structures.svg?branch=weighted_graph)
+[![Travis](https://travis-ci.org/efrainc/data_structures.svg?branch=master)](https://travis-ci.org/efrainc/data_structures.svg?branch=master)
 Working directory for Efrain, Mark, Henry - Python Data Structures
 
 Linked_list
