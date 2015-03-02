@@ -2,6 +2,7 @@ import pytest
 import weighted_graph as wgraph
 from collections import OrderedDict
 
+
 def test___init__():
     """Test instantiates simple graph with dictionary."""
     assert wgraph.Wgraph().dict == {}
@@ -53,10 +54,12 @@ def test_add_edge_empty(empty_graph):
     assert empty_graph.has_node('b')
     assert empty_graph.dict['a'] == {'b': 7}
 
+
 def test_del_node_empty(empty_graph):
     """Test deletesthenode'n' from the graph, raises an error if no such node exists"""
-    with pytest.raises(AttributeError):
+    with pytest.raises(AttributeError) as message:
         empty_graph.del_node('a')
+    assert 'No Such Node Exists' in str(message.value)
 
 
 def test_del_node_populated(populated_graph):
@@ -69,8 +72,10 @@ def test_del_node_populated(populated_graph):
 def test_del_edge_empty(empty_graph):
     """Test deletes the edge connecting non-existing 'n1' and 'n2' from the graph,
     raises an error if no such edge exists"""
-    with pytest.raises(AttributeError):
+    with pytest.raises(AttributeError) as message:
         empty_graph.del_edge('a', 'b')
+    assert 'No Such Edge Exists' in str(message.value)
+
 
 
 def test_del_edge_empty(populated_graph):
@@ -90,8 +95,9 @@ def test_neighbors(populated_graph):
 def test_adjacent_empty(empty_graph):
     """Test returns True if there is an edge connecting n1 and n2, False if not, raises an error if
     either of the supplied nodes are not in g"""
-    with pytest.raises(KeyError):
+    with pytest.raises(KeyError) as message:
         empty_graph.adjacent('a', 'b')
+    assert 'Node(s) not in graph.' in str(message.value)
 
 
 def test_adjacent_pop(populated_graph):
@@ -103,12 +109,12 @@ def test_adjacent_pop(populated_graph):
 def test_depth_first_traversal(depth_populated_graph):
     """Test the depth first tranversal approach for a graph of arbitrary length"""
     print "depth: " + str(depth_populated_graph.depth_first_traversal('a'))
-    assert depth_populated_graph.depth_first_traversal('a') == ['a', 'c', 'g', 'b', 'd', 'f', 'e']
+    assert depth_populated_graph.depth_first_traversal('a') == ['a', 'b', 'd', 'f', 'e', 'c', 'g']
 
 def test_breadth_first_traversal(breadth_populated_graph):
     """Test the breadth first tranversal approach for a graph of arbitrary length"""
     print "breadth: " + str(breadth_populated_graph.breadth_first_traversal('a'))
-    assert breadth_populated_graph.breadth_first_traversal('a') == ['a', 'c', 'b', 'g', 'f', 'e', 'd', 'h']
+    assert breadth_populated_graph.breadth_first_traversal('a') == ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 
 def test_breadth_with_cycle(populated_graph):
     """Test the depth first tranversal approach for a graph of arbitrary length and a cycle"""
@@ -136,13 +142,13 @@ def populated_graph():
 def depth_populated_graph():
     graph = wgraph.Wgraph()
     graph.dict = {
-        'a': {'b': 1, 'c': 2, 'e': 3},
-        'b': {'d': 4, 'f': 5},
-        'c': {'g': 6},
-        'd': {},
-        'e': {},
-        'f': {'e': 7},
-        'g': {}
+        'a': OrderedDict([('b', 1), ('c', 2), ('e', 3)]),
+        'b': OrderedDict([('d', 4), ('f', 5)]),
+        'c': OrderedDict([('g', 6)]),
+        'd': OrderedDict(),
+        'e': OrderedDict(),
+        'f': OrderedDict([('e', 7)]),
+        'g': OrderedDict()
         }
     return graph
 
@@ -150,13 +156,13 @@ def depth_populated_graph():
 def breadth_populated_graph():
     graph = wgraph.Wgraph()
     graph.dict = {
-        'a': {'b': 1, 'c': 2},
-        'b': {'d': 3, 'e': 4},
-        'c': {'f': 5, 'g': 6},
-        'd': {},
-        'e': {'h': 7},
-        'f': {},
-        'g': {},
-        'h': {},
+        'a': OrderedDict([('b', 1), ('c', 2)]),
+        'b': OrderedDict([('d', 3), ('e', 4)]),
+        'c': OrderedDict([('f', 5), ('g', 6)]),
+        'd': OrderedDict(),
+        'e': OrderedDict([('h', 7)]),
+        'f': OrderedDict(),
+        'g': OrderedDict(),
+        'h': OrderedDict(),
         }
     return graph
