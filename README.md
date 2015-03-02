@@ -76,5 +76,10 @@ Simple Graph Traversal
     cyclic graphs. The following reference was used to guide our design:
     http://en.wikipedia.org/wiki/Graph_traversal
 
+Weight Graph
+    A simple graph, where each edge has a weight. Weight defaults to zero if no
+    weight is assigned. Edges are stored as an ordered dict to ensure graph
+    traversal methods are predictable.
+
 Collaborations:
     None
