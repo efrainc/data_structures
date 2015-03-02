@@ -16,7 +16,7 @@ def timed_func(func):
     return timed
 
 
-class Sgraph(object):
+class Wgraph(object):
     """A class defining a unweighted direct simple graph."""
 
     def __init__(self):
@@ -64,7 +64,7 @@ class Sgraph(object):
         """Delete edge connecting 'n1' and 'n2' from the graph, raise
         error if edge doesn't exist."""
         try:
-            self.dict[n1].remove(n2)
+            del self.dict[n1][n2]
         except (ValueError, KeyError):
             raise AttributeError('No Such Edge Exists')
 
@@ -121,7 +121,7 @@ class Sgraph(object):
 
 
 def populated_graph():
-    graph = Sgraph()
+    graph = Wgraph()
     graph.dict = {
         'a': ['b'],
         'b': ['c', 'd'],
@@ -132,7 +132,7 @@ def populated_graph():
     return graph
 
 def depth_populated_graph():
-    graph = Sgraph()
+    graph = Wgraph()
     graph.dict = {
         'a': ['b', 'c', 'e'],
         'b': ['d', 'f'],
