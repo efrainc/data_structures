@@ -8,9 +8,13 @@ def test___init__():
     assert wgraph.Wgraph().dict == {}
 
 
-def test_nodes(empty_graph, populated_graph):
-    """Test return list of all nodes in a graph"""
+def test_nodes_empty(empty_graph):
+    """Test return list of all nodes in an empty graph"""
     assert empty_graph.nodes() == []
+
+
+def test_nodes_populated(populated_graph):
+    """Test return list of all nodes in a populated graph"""
     l = ['a', 'b', 'c', 'd', 'e']
     sortedlist = populated_graph.nodes()
     sortedlist.sort()
