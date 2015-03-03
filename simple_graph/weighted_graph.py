@@ -36,8 +36,7 @@ class Wgraph(object):
     def add_node(self, node):
         """adds a new node 'n' to the graph. Nodes must be hashable values."""
         try:
-            ordered_dict = OrderedDict()
-            self.dict.setdefault(node, ordered_dict)
+            self.dict.setdefault(node, OrderedDict())
         except (AttributeError, TypeError):
             raise "Node Value must be hashable value"
 
