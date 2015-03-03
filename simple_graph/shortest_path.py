@@ -1,4 +1,5 @@
-from simple_graph.weighted_graph import Wgraph
+from weighted_graph import Wgraph
+import copy
 
 
 def dijkstra(weighted_graph, start, end):
@@ -11,18 +12,24 @@ def dijkstra(weighted_graph, start, end):
 
     for node in weighted_graph.nodes():
         if node is not start:
-            list_of_tuples_node_totalweight.append(node, float("inf"))
-        unvisited = list_of_tuples_node_totalweight
+            list_of_tuples_node_totalweight.append((node, float("inf")))
+        unvisited = copy.deepcopy(list_of_tuples_node_totalweight)
+        print "unvisited " + str(unvisited)
 
     while unvisited:
         sorted_list = sorted(unvisited, key=lambda x: x[1])
+        print "sorted: " + str(sorted_list)
         temp = sorted_list[0]
         unvisited = sorted_list[1:]
 
-        for neighbor in temp.neighbors():
-            alt = temp[1] + weighted_graph[temp[0]][neighbor]
-            if alt < list_of_tuples_node_totalweight[neighbor][1]:
-                list_of_tuples_node_totalweight[neighbor][1] = alt
+        for neighbor in weighted_graph.neighbors(temp[0]):
+            alt = temp[1] + weighted_graph.dict[temp[0]][neighbor]
+            print "neighbor " + neighbor
+            holder = [weight for node, weight in enumerate(list_of_tuples_node_totalweight) if node  == neighbor]
+            if alt < holder:
+                list_of_tuples_node_totalweight.pop(
+                    list_of_tuples_node_totalweight.index((neighbor, holder)))
+                list_of_tuples_node_totalweight.append((neighbor, alt))
                 prev.append(neighbor)
                 if temp == end:
                     break

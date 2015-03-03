@@ -1,25 +1,28 @@
 import pytest
 import weighted_graph as wgraph
 from collections import OrderedDict
-from shortest_path import djikstras
+from shortest_path import dijkstra
 
 
-def test_djikstras_long_path(populated_graph):
+def test_dijkstra_long_path(populated_graph1):
     """Test a graph with a shortest path with more nodes than longer path"""
-    dist, path = djikstras(populated_graph1, 'a', 'e')
+    dist, path = dijkstra(populated_graph1, 'a', 'e')
     assert dist == 6
     assert path == ['a', 'c', 'd', 'e']
 
-def test_djikstras_no_path(populated_graph):
-    """Tests a graph where start and end do not connect"""
-    dist, path = djikstras(populated_graph1, 'a', 'b')
-    assert False
 
-def test_djikstras_short_cut(populated_graph):
-    """Test a graph to see if it takes a low weight shortcut"""
-    dist, path = djikstras(populated_graph1, 'a', 'e')
-    assert dist == 20
-    assert path == ['a', 'b', 'd', 'e']
+# def test_dijkstra_no_path(no_path_graph):
+#     """Tests a graph where start and end do not connect"""
+#     dist, path = dijkstra(no_path_graph, 'a', 'b')
+#     assert False
+
+
+# def test_dijkstra_short_cut(populated_graph2):
+#     """Test a graph to see if it takes a low weight shortcut"""
+#     dist, path = dijkstra(populated_graph2, 'a', 'e')
+#     assert dist == 20
+#     assert path == ['a', 'b', 'd', 'e']
+
 
 @pytest.fixture(scope='function')
 def populated_graph1():
@@ -33,6 +36,7 @@ def populated_graph1():
         }
     return graph
 
+
 @pytest.fixture(scope='function')
 def populated_graph2():
     graph = wgraph.Wgraph()
@@ -44,6 +48,7 @@ def populated_graph2():
         'e': OrderedDict([('f', 8)])
         }
     return graph
+
 
 @pytest.fixture(scope='function')
 def no_path_graph():
