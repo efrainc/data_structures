@@ -93,7 +93,6 @@ class Wgraph(object):
         Return the path when complete."""
         return self.recursive_dft(start, [])
 
-
     def recursive_dft(self, start, visited=[]):
         """Recursive function for depth first traversal."""
         if start not in visited:
@@ -133,6 +132,7 @@ def populated_graph():
         }
     return graph
 
+
 def depth_populated_graph():
     graph = Wgraph()
     graph.dict = {
@@ -159,11 +159,3 @@ if __name__ == '__main__':
     print temp2.depth_first_traversal('a')
     print "breadth_larger_cycle"
     print temp2.breadth_first_traversal('a')
-
-
-
-
-
-
-
-
