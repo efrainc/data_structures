@@ -1,7 +1,5 @@
 #! /usr/bin/env python
-
-# Simple Graph project for Efrain, Henry, Mark
-# Graph is unweighted but directed
+# Weighted, Directed Graph project for Efrain, Henry, Mark
 
 import time
 from collections import OrderedDict
