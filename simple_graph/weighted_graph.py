@@ -1,7 +1,5 @@
 #! /usr/bin/env python
-
-# Simple Graph project for Efrain, Henry, Mark
-# Graph is unweighted but directed
+"""Weighted, Directed Graph project for Efrain, Henry, Mark."""
 
 import time
 from collections import OrderedDict
@@ -36,8 +34,7 @@ class Wgraph(object):
     def add_node(self, node):
         """adds a new node 'n' to the graph. Nodes must be hashable values."""
         try:
-            ordered_dict = OrderedDict()
-            self.dict.setdefault(node, ordered_dict)
+            self.dict.setdefault(node, OrderedDict())
         except (AttributeError, TypeError):
             raise "Node Value must be hashable value"
 
@@ -94,7 +91,6 @@ class Wgraph(object):
         Return the path when complete."""
         return self.recursive_dft(start, [])
 
-
     def recursive_dft(self, start, visited=[]):
         """Recursive function for depth first traversal."""
         if start not in visited:
@@ -134,6 +130,7 @@ def populated_graph():
         }
     return graph
 
+
 def depth_populated_graph():
     graph = Wgraph()
     graph.dict = {
@@ -160,11 +157,3 @@ if __name__ == '__main__':
     print temp2.depth_first_traversal('a')
     print "breadth_larger_cycle"
     print temp2.breadth_first_traversal('a')
-
-
-
-
-
-
-
-
