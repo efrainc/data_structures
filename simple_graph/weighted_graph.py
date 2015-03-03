@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-# Weighted, Directed Graph project for Efrain, Henry, Mark
+"""Weighted, Directed Graph project for Efrain, Henry, Mark."""
 
 import time
 from collections import OrderedDict
