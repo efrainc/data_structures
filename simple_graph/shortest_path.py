@@ -42,8 +42,8 @@ def dijkstraPQ(weighted_graph, start, end):
     """Dijkstra algorithm with PQ."""
     dict_node_totalweight = {}
     dict_node_totalweight[start] = 0
-    prev = []
     pq = PriorityQueue()
+    pq.put((0, start))
     for node in weighted_graph.nodes():
         if node is not start:
             dict_node_totalweight[node] = float("inf")
@@ -51,13 +51,18 @@ def dijkstraPQ(weighted_graph, start, end):
 
     while pq:
         temp = pq.get()
-        if temp[1] == end:
+        # test if at node with no neighbors (lowest value is inf)
+        if temp[0] == float("inf"):
             break
+        # compute weights for all neighbors
         for neighbor in weighted_graph.neighbors(temp[1]):
             alt = temp[0] + weighted_graph.dict[temp[1]][neighbor]
-            if alt < dict_node_totalweight[neighbor]:
+            if alt < dict_node_totalweight.get(neighbor):
+                print 'new weight = {}'.format(alt)
                 dict_node_totalweight[neighbor] = alt
-                prev.append(temp[0])
-                pq.put(alt, neighbor)
-    print 'prev: {}'.format(prev)
-    return prev
+                pq.put((alt, neighbor))
+        # Check if we've reached our destination
+        if temp[1] == end:
+            break
+    # print 'weight: {}'.format(dict_node_totalweight[end])
+    return dict_node_totalweight[end]
