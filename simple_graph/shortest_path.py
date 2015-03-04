@@ -1,9 +1,23 @@
 from Queue import PriorityQueue
+import weighted_graph as wgraph
+from collections import OrderedDict
 import copy
+import time
 
 
+def timed_func(func):
+    """Decorator for timing our traversal methods."""
+    def timed(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        elapsed = time.time() - start
+        print "time expired: %s" % elapsed
+        return result
+    return timed
+
+@timed_func
 def dijkstra(weighted_graph, start, end):
-
+    """Dijkstra algorithm with list of tuples and full iteration"""
     list_of_tuples_node_totalweight = []
     list_of_tuples_node_totalweight.append((start, 0))
     # weight_dict[start] = 0          # total weight/distance
@@ -38,6 +52,7 @@ def dijkstra(weighted_graph, start, end):
     return list_of_tuples_node_totalweight[-1][1]
 
 
+@timed_func
 def dijkstraPQ(weighted_graph, start, end):
     """Dijkstra algorithm with PQ."""
     dict_node_totalweight = {}
@@ -58,7 +73,7 @@ def dijkstraPQ(weighted_graph, start, end):
         for neighbor in weighted_graph.neighbors(temp[1]):
             alt = temp[0] + weighted_graph.dict[temp[1]][neighbor]
             if alt < dict_node_totalweight.get(neighbor):
-                print 'new weight = {}'.format(alt)
+                # print 'new weight = {}'.format(alt)
                 dict_node_totalweight[neighbor] = alt
                 pq.put((alt, neighbor))
         # Check if we've reached our destination
@@ -66,3 +81,25 @@ def dijkstraPQ(weighted_graph, start, end):
             break
     # print 'weight: {}'.format(dict_node_totalweight[end])
     return dict_node_totalweight[end]
+
+def populated_graph1():
+    graph = wgraph.Wgraph()
+    graph.dict = {
+        'a': OrderedDict([('b', 10), ('c', 1), ('e', 20)]),
+        'b': OrderedDict([('d', 7)]),
+        'c': OrderedDict([('d', 2), ('e', 8)]),
+        'd': OrderedDict([('e', 3)]),
+        'e': OrderedDict()
+        }
+    return graph
+
+
+if __name__ == '__main__':
+    temp = populated_graph1()
+    print "Dijkstra"
+    print dijkstra(temp, 'a', 'e')
+    print "DijkstraPQ"
+    print dijkstraPQ(temp, 'a', 'e')
+
+
+
