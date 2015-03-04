@@ -1,4 +1,4 @@
-from weighted_graph import Wgraph
+from Queue import PriorityQueue
 import copy
 
 

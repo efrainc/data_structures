@@ -2,6 +2,7 @@ import pytest
 import weighted_graph as wgraph
 from collections import OrderedDict
 from shortest_path import dijkstra
+from shortest_path import dijkstraPQ
 
 
 def test_dijkstra_long_path(populated_graph1):
@@ -22,6 +23,26 @@ def test_dijkstra_short_cut(populated_graph2):
     dist = dijkstra(populated_graph2, 'a', 'e')
     assert dist == 12
     # assert path == ['a', 'b', 'd', 'e']
+
+def test_dijkstraPQ_long_path(populated_graph1):
+    """Test a graph with a shortest path with more nodes than longer path"""
+    dist = dijkstraPQ(populated_graph1, 'a', 'e')
+    assert dist == 6
+    # assert path == ['a', 'c', 'd', 'e']
+
+
+def test_dijkstraPQ_no_path(no_path_graph):
+    """Tests a graph where start and end do not connect"""
+    dist = dijkstraPQ(no_path_graph, 'a', 'b')
+    assert dist  == float('inf')
+
+
+def test_dijkstraPQ_short_cut(populated_graph2):
+    """Test a graph to see if it takes a low weight shortcut"""
+    dist = dijkstraPQ(populated_graph2, 'a', 'e')
+    assert dist == 12
+    # assert path == ['a', 'b', 'd', 'e']
+
 
 
 @pytest.fixture(scope='function')
