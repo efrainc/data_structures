@@ -6,22 +6,22 @@ from shortest_path import dijkstra
 
 def test_dijkstra_long_path(populated_graph1):
     """Test a graph with a shortest path with more nodes than longer path"""
-    dist, path = dijkstra(populated_graph1, 'a', 'e')
+    dist = dijkstra(populated_graph1, 'a', 'e')
     assert dist == 6
-    assert path == ['a', 'c', 'd', 'e']
+    # assert path == ['a', 'c', 'd', 'e']
 
 
-# def test_dijkstra_no_path(no_path_graph):
-#     """Tests a graph where start and end do not connect"""
-#     dist, path = dijkstra(no_path_graph, 'a', 'b')
-#     assert False
+def test_dijkstra_no_path(no_path_graph):
+    """Tests a graph where start and end do not connect"""
+    dist = dijkstra(no_path_graph, 'a', 'b')
+    assert dist  == float('inf')
 
 
-# def test_dijkstra_short_cut(populated_graph2):
-#     """Test a graph to see if it takes a low weight shortcut"""
-#     dist, path = dijkstra(populated_graph2, 'a', 'e')
-#     assert dist == 20
-#     assert path == ['a', 'b', 'd', 'e']
+def test_dijkstra_short_cut(populated_graph2):
+    """Test a graph to see if it takes a low weight shortcut"""
+    dist = dijkstra(populated_graph2, 'a', 'e')
+    assert dist == 12
+    # assert path == ['a', 'b', 'd', 'e']
 
 
 @pytest.fixture(scope='function')

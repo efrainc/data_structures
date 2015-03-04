@@ -35,7 +35,7 @@ def dijkstra(weighted_graph, start, end):
                 # if temp == end:
                 #     break
         unvisited = sorted_list[1:]
-    return list_of_tuples_node_totalweight, prev
+    return list_of_tuples_node_totalweight[-1][1]
 
 
 
