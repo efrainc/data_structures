@@ -82,5 +82,12 @@ Weight Graph
     weight is assigned. Edges are stored as an ordered dict to ensure graph
     traversal methods are predictable.
 
+Shortest Path
+    Takes a weighted graph and returns the weight (cost) of the shortest path. We
+    use the Dijkstra algorithim to determine the shortest path. Futher study was done
+    to determine if a priority queue implementation would be faster than a
+    standard min sort on a list of items. The priority queue was faster using
+    small graphs for testing.
+
 Collaborations:
     None
