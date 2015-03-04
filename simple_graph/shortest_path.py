@@ -21,14 +21,13 @@ def dijkstra(weighted_graph, start, end):
         for i, j in list_of_tuples_node_totalweight:
             if i == temp[0]:
                 new_temp = j
-                print new_temp
 
         for neighbor in weighted_graph.neighbors(temp[0]):
             alt = new_temp + weighted_graph.dict[temp[0]][neighbor]
             for i, j in list_of_tuples_node_totalweight:
                 if i == neighbor:
                     list_v = j
-                    print list_v
+
             if alt < list_v:
                 list_of_tuples_node_totalweight.remove((neighbor, list_v))
                 list_of_tuples_node_totalweight.append((neighbor, alt))
